@@ -1,0 +1,130 @@
+%Wir verwenden eine DIN-A4-Seite und die Schriftgröße 12.
+\documentclass[a4paper,12pt]{scrartcl} 
+
+
+%Diese drei Pakete benötigen wir für die Umlaute, Deutsche Silbentrennung etc.
+%Apple-Nutzer sollten anstelle von \usepackage[latin1]{inputenc} das Paket \usepackage[applemac]{inputenc} verwenden
+%% \usepackage[latin1]{inputenc}
+%%apt-get install texlive-lang-german damit ngerman keine Probleme mehr macht !!
+\usepackage[utf8]{inputenc} 
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+
+%Das Paket erzeugt ein anklickbares Verzeichnis in der PDF-Datei.
+\usepackage{hyperref}
+
+%Das Paket wird für die anderthalb-zeiligen Zeilenabstand benötigt
+\usepackage{setspace}
+
+%Einrückung eines neuen Absatzes
+\setlength{\parindent}{0em}
+
+%Definition der Ränder
+\usepackage[paper=a4paper,left=30mm,right=30mm,top=30mm,bottom=30mm]{geometry} 
+
+%Abstand der Fussnoten
+\deffootnote{1em}{1em}{\textsuperscript{\thefootnotemark\ }}
+
+%Regeln, bis zu welcher Tiefe (section,subsection,subsubsection) Überschriften angezeigt werden sollen (Anzeige der Überschriften im Verzeichnis / Anzeige der Nummerierung)
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+
+
+
+\begin{document}
+
+%Beginn der Titelseite
+\begin{titlepage}
+\begin{small}
+\vfill {HTWK Leipzig\\ 
+Fachbereich IMN \\ 
+Wintersemester 2012/2013}
+\end{small}
+
+
+\begin{center}
+\begin{Large}
+\vfill {\textsf{\textbf{
+Die Möglichkeiten des System-Managements der Firewall-Distribution pfSense\\
+}}}
+\end{Large}
+Beleg im Fach Netzwerk- und System-Management
+\end{center}
+
+\begin{small}
+\vfill Marcel Kirbst \\ Sieglitz 39 \\  06618 Molau \\  m@mkirbst.de\\ 
+\today
+\end{small}
+
+\end{titlepage}
+%Ende der Titelseite
+
+
+%Inhaltsverzeichnis (aktualisiert sich erst nach dem zweiten Setzen)
+\tableofcontents
+\thispagestyle{empty}
+
+%Beginn einer neuen Seite
+\clearpage
+
+%Anderthalbzeiliger Zeilenabstand ab hier
+\onehalfspacing
+
+\pagestyle{plain}
+
+
+\section{Einleitung}
+Dieser Beleg befasst sich der Vorstellung der Routerdistribution pfSense.
+Im Vergleich zu den unzähligen anderen, existierenden Routerdistributionen
+zeichnet sich pfSense durch seinen hohen Funktionsumfang aus, der beispielsweise
+auch Funktionen zur Sicherstellung von Redundanz und Ausfallsicherheit umfasst,
+wie sie sonst nur bei preisintensiven proprietären Lösungen kommerzieller
+Anbieter verfügbar sind.
+
+
+Nachdem grundlegende Begriffe erkläutert wurden, soll kurz auf die Entwicklungsgeschichte und Vorzüge des Betriebssystems FreeBSD eingegangen werden, welches die Grundlage für pfSense bildet. Im folgenden soll ein kurzer Überblick über den Funktionsumfang von pfSense gegeben werden, für sich genommen und im Vergleich zu anderen Rouuterdistributionen. Abschließend sollen beispielhaft drei Konfigurationen vorgestellt werden um die Vielseitigkeit und Leistungsfähigkeit von pfSense zu demonstrieren.
+
+
+\section{Routerdistributionen - Besonderheiten und Merkmale im Allgemeinen}
+Routerdistributionen sind für einen speziellen Einsatzzweck kozipierte Betriebssysteme. 
+
+Unter dem Begriff Betriebssystem fasst man eine Menge von Software zusammen, die auf einem Rechnersystem nach dem Start zur Ausführung kommt, die Ressourcen dieses Rechnersystems verwarltet und es ermöglicht weitere Anwenungsprogramme zu starten.
+
+Routerdistributionen werden in der Regel folglich unter der Annahme entwickelt, direkt auf einem Rechnersystem installiert zu werden und über alle Ressourcen dieses Rechnersystems zu verfügen. Dieser Annahme kommt eine besonders hohe Bedeutung zu, da die beiden Schwerpunkte einer Routerdistribution Sicherheit und Stabilität darstellen. 
+
+Ein Router ist ein Netzwerkgerät, das mit mindestens zwei Netzwerkschnittstellen ausgestattet ist und den Netzwerkverkehr zwischen den betreffenden Netzwerken, unter Beachtung eines vorgegebenen Regelwerkes, vermittelt.
+
+
+\subsection{Zwischenüberschrift}
+Hier beginnt der erste Unterabschnitt des ersten Hauptteils.
+
+\subsection{Zwischenüberschrift}
+Hier beginnt der zweite Unterabschnitt des ersten Hauptteils.
+
+\section{zweiter Hauptteil}
+Hier beginnnt der zweite Hauptteil des Belegs.
+
+\subsection{Zwischenüberschrift}
+Hier beginnt der erste Unterabschnitt des zweiten Hauptteils.
+
+\subsection{Zwischenüberschrift}
+Hier beginnt der zweite Unterabschnitt des zweiten Hauptteils.
+
+
+\section{Schluss}
+Dies ist der Schlussteil.
+%Beginn einer neuen Seite
+\clearpage
+
+\section{Literaturverzeichnis}
+
+Musterfrau, Renate: Muster. Frankfurt 2003.
+
+
+Mustermann, Helmut: Noch ein Muster. Mit einer Einleitung hrsg. von Frank Muster. Frankfurt 2003.
+
+
+\end{document}
+%-------------------
+%Hier endet der Text deiner Hausarbeit
+%-------------------
