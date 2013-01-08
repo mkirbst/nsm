@@ -6,15 +6,46 @@
 %Apple-Nutzer sollten anstelle von \usepackage[latin1]{inputenc} das Paket \usepackage[applemac]{inputenc} verwenden
 %% \usepackage[latin1]{inputenc}
 %%apt-get install texlive-lang-german damit ngerman keine Probleme mehr macht !!
-\usepackage[utf8]{inputenc} 
-\usepackage[T1]{fontenc}
-\usepackage[ngerman]{babel}
+%\usepackage[utf8]{inputenc} 
+%\usepackage[T1]{fontenc}
+%\usepackage[ngerman]{babel}
 
 %Das Paket erzeugt ein anklickbares Verzeichnis in der PDF-Datei.
-\usepackage{hyperref}
+%\usepackage{hyperref}
 
 %Das Paket wird für die anderthalb-zeiligen Zeilenabstand benötigt
 \usepackage{setspace}
+
+%%HTWM-Vorlage - benoetigt apt-get install texlive-fonts-extra
+\setcounter{tocdepth}{3}				%Schatelungstiefe Inhaltsverz.
+\usepackage[utf8]{inputenc}			%deutsche Umlaute
+\usepackage[ngerman]{babel}			%Rechtschreibprüfung
+\usepackage{color,listings} 			%Quellcode Highlighting, bindet das
+%Paket Listings ein
+\usepackage{listings}
+\usepackage{color}
+\usepackage{textcomp}
+\usepackage[T1]{fontenc}				%srccode
+\usepackage[scaled]{beramono}		%srccode
+%\usepackage{longtable}				%mehrseitige tabellen
+\usepackage[tableposition=b]{caption}
+\usepackage[pdftex, pdftoolbar=false, hyperfootnotes=false, bookmarks,
+bookmarksopen, bookmarksnumbered, bookmarksopenlevel=2, pdfpagelabels=true,
+pdfstartpage=3, pdfstartview=FitH,]{hyperref} %Verlinkungen
+
+\definecolor{Navy}{rgb}{0,0,0.5}
+\definecolor{Gray}{gray}{0.5}
+
+\hypersetup{
+	colorlinks=true, 			% false: boxed links; true: colored links
+	linkcolor=Navy,          		% color of internal links
+	citecolor=Gray,        			% color of links to bibliography
+	filecolor=magenta,      		% color of file links
+	urlcolor=blue,           			% color of external links
+	linkbordercolor={1 1 1}, 		% set to white
+	citebordercolor={1 1 1} 		% set to white
+}
+
 
 %Einrückung eines neuen Absatzes
 \setlength{\parindent}{0em}
@@ -26,8 +57,8 @@
 \deffootnote{1em}{1em}{\textsuperscript{\thefootnotemark\ }}
 
 %Regeln, bis zu welcher Tiefe (section,subsection,subsubsection) Überschriften angezeigt werden sollen (Anzeige der Überschriften im Verzeichnis / Anzeige der Nummerierung)
-\setcounter{tocdepth}{3}
-\setcounter{secnumdepth}{3}
+%\setcounter{tocdepth}{3}
+%\setcounter{secnumdepth}{3}
 
 
 
@@ -52,7 +83,8 @@ Beleg im Fach Netzwerk- und System-Management
 \end{center}
 
 \begin{small}
-\vfill Marcel Kirbst \\ Sieglitz 39 \\  06618 Molau \\  m@mkirbst.de\\ 
+\vfill Marcel Kirbst \\ Sieglitz 39 \\  06618 Molau \\
+marcel.kirbst@stud.htwk-leipzig.de\\
 \today
 \end{small}
 
@@ -82,38 +114,145 @@ wie sie sonst nur bei preisintensiven proprietären Lösungen kommerzieller
 Anbieter verfügbar sind.
 
 
-Nachdem grundlegende Begriffe erkläutert wurden, soll kurz auf die Entwicklungsgeschichte und Vorzüge des Betriebssystems FreeBSD eingegangen werden, welches die Grundlage für pfSense bildet. Im folgenden soll ein kurzer Überblick über den Funktionsumfang von pfSense gegeben werden, für sich genommen und im Vergleich zu anderen Rouuterdistributionen. Abschließend sollen beispielhaft drei Konfigurationen vorgestellt werden um die Vielseitigkeit und Leistungsfähigkeit von pfSense zu demonstrieren.
+Nachdem grundlegende Begriffe erläutert wurden, soll kurz auf die
+Entwicklungsgeschichte und Vorzüge des Betriebssystems FreeBSD eingegangen
+werden, welches die Grundlage für pfSense bildet. Im folgenden soll ein kurzer
+Überblick über den Funktionsumfang von pfSense gegeben werden, für sich genommen
+und im Vergleich zu anderen Rouuterdistributionen. Abschließend sollen
+beispielhaft drei Konfigurationen vorgestellt werden um die Vielseitigkeit und
+Leistungsfähigkeit von pfSense zu demonstrieren.
 
 
 \section{Routerdistributionen - Besonderheiten und Merkmale im Allgemeinen}
-Routerdistributionen sind für einen speziellen Einsatzzweck kozipierte Betriebssysteme. 
 
-Unter dem Begriff Betriebssystem fasst man eine Menge von Software zusammen, die auf einem Rechnersystem nach dem Start zur Ausführung kommt, die Ressourcen dieses Rechnersystems verwarltet und es ermöglicht weitere Anwenungsprogramme zu starten.
+\subsection{Begrifflichkeiten im Zusammenhang mit Routerdistributionen}
+Routerdistributionen sind auf einen speziellen Einsatzzweck hin optimierte
+Betriebssysteme.
 
-Routerdistributionen werden in der Regel folglich unter der Annahme entwickelt, direkt auf einem Rechnersystem installiert zu werden und über alle Ressourcen dieses Rechnersystems zu verfügen. Dieser Annahme kommt eine besonders hohe Bedeutung zu, da die beiden Schwerpunkte einer Routerdistribution Sicherheit und Stabilität darstellen. 
+Unter dem Begriff Betriebssystem fasst man eine Menge von Software zusammen, die
+auf einem Rechnersystem nach dem Start zur Ausführung kommt, die Ressourcen
+dieses Rechnersystems verwaltet und es ermöglicht weitere Anwenungsprogramme zu
+starten.
 
-Ein Router ist ein Netzwerkgerät, das mit mindestens zwei Netzwerkschnittstellen ausgestattet ist und den Netzwerkverkehr zwischen den betreffenden Netzwerken, unter Beachtung eines vorgegebenen Regelwerkes, vermittelt.
+Routerdistributionen werden in der Regel so konzipiert und entwickelt,
+um direkt auf einem Rechnersystem installiert zu werden und über alle Ressourcen
+dieses Rechnersystems zu verfügen. Dieser Annahme kommt eine besonders hohe
+Bedeutung zu, da die beiden Schwerpunkte einer Routerdistribution Sicherheit und
+Stabilität darstellen. Andere Merkmale wie zum Beispiel m\"oglichst hoher
+Funktionsumfang besitzen dem gegen\"uber niedrigere Priorit\"at, wobei jedoch
+verschiedene Routerdistributionen die einzelnen Merkmale im
+Detail unterschiedlich stark priorisieren.
+
+Ein Router ist ein Netzwerkgerät, das mit mindestens zwei
+Netzwerkschnittstellen ausgestattet ist und den Netzwerkverkehr zwischen den
+betreffenden Netzwerken, unter Beachtung eines vorgegebenen Regelwerkes,
+vermittelt.
+
+\subsection{Merkmale von Routerdistributionen}
+Routerdistributionen werden in der Regel nicht von Grund auf entwickelt sondern
+basieren auf einem modifizierten Betriebssystem. Trotz dieser Modifikationen
+unterliegen die verschiedenen Routerdistributionen somit mehr oder weniger
+stark den Merkmalen, Besonderheiten und Einschr\"ankungen des jeweils zu Grunde
+liegenden Betriebssystems. Somit ist das zu Grunde liegende Betreibssystem ein
+erstes wichtiges Unterscheidungskriterium f\"ur Routerdistributionen.
+
+Ein weiteres wichtiges Unterscheidungskriterium stellt die Art der Entwicklung
+und Lizenzierung dar. Es existieren kommerzielle Produkte genauso wie
+quelloffene Produkte. Da kommerzielle Produkte in den allermeisten F\"alle
+jedoch nicht im Quellcode verf\"ugbar und somit schwer an spezielle
+Bed\"urfnisse anzupassen sind und au\ss{}erdem oft betr\"achtliche Lizenzkosten
+verursachen, soll dieser Typus von Routerdistributionen in dieser Arbeit
+au\ss{}en vor bleiben. 
+ 
+Weiterhin spielt f\"ur den potentiellen Einsatz im kommerziellen Umfeld
+neben Funktionen wie zum Beispiel VLAN-Unterst\"utzung auch der Faktor der
+Verf\"ugbarkeit eines kommerziellen Supports eine wichtige Rolle. Steht f\"ur
+komplexe Netzwerke wie etwa in Hochschulen oder mittelst\"andischen und
+gro\ss{}en Unternehmen mit hunderten bis tausenden Nutzern die Konzeption und
+Implementierung einer Router- und Firewalll\"osung bevor, ist es in der Regel
+obligatorisch, gegebenenfalls auf schnellen kommerziellen Support
+zur\"uckgreifen zu k\"onnen.
+
+Um den generellen Kostenrahmen absch\"atzen zu k\"onnen und damit
+Planungssicherheit in einem bestimmten Rahmen zu bieten, sollte au\ss{}erdem
+eine Bedarfsanalyse durchgef\"uhrt werden. Diese sollte nicht nur die
+derzeitigen Anforderungen ber\"ucksichtigen, sondern auch zuk\"unftige wie zum
+Beispiel die Unterst\"utzung von IPv6.
+ 
+\subsection{Konkrete Routerdistributionen im Vergleich}
+Im Folgenden soll ein Vergleich dreier verbreiteter OpenSource-
+Routerdistributionen erfolgen. 
+
+\subsubsection{Die Routerdistribution IPCop}
+IPCop ist eine Router-Distribution, die auf dem Betriebssystemkern Linux
+basiert und in der Version 1.0 bereits am 1. Januar 2002 ver\"offentlicht
+wurde. \footnote{\cite{IPCopManual}}
+
+\subsubsection{Die Routerdistribution IPFire}
+IPFire basiert wie pfSense auf dem Betriebssystemkern Linux. Im Vergleich zu
+IPFire 
+
+\subsubsection{Die Routerdistribution pfSense}
 
 
-\subsection{Zwischenüberschrift}
-Hier beginnt der erste Unterabschnitt des ersten Hauptteils.
 
-\subsection{Zwischenüberschrift}
-Hier beginnt der zweite Unterabschnitt des ersten Hauptteils.
+\subsubsection{Leistungsmerkmale der vorgestellten Routerdistributionen im
+Vergleich}
+Im folgenden sollen die wichtigsten Vorz\"uge und Leistungsmerkmale der
+ausgew\"ahlten Routerdistributionen noch einmal direkt gegen\"uber gestellt
+werden.\\
 
-\section{zweiter Hauptteil}
-Hier beginnnt der zweite Hauptteil des Belegs.
 
-\subsection{Zwischenüberschrift}
+Ber\"ucksichtigt werden im Folgenden jedoch nur Funktionen, die bei einer
+Standardinstallation bereits verf\"ugbar sind oder durch ein eventuell
+vorhandes Paketmanagement f\"ur die jeweilige Routerdistribution
+benutzerfreundlich nachger\"ustet werden k\"onnen und somit die Stabilit\"at
+und Sicherheit des Gesamtsystems nicht oder nur geringf\"ugig verschlechtern.
+Da es sich bei allen drei Kandidaten um OpenSource-L\"osungen handelt k\"onnen
+zus\"atzliche Funktionen nat\"urlich mit unterschiedlich hohem Aufand trotzdem
+nachger\"ustet werden, jedoch handelt es sich dann um individuelle
+Modifikationen die in der Praxis in der Regel nicht im gr\"o\ss{}eren Umfeld
+getestet wurden und eventuell bei sp\"ateren Updates der Firewalldistribution
+Konflikte verursachen.\\
+
+-tabellarische Auflistung-
+Betriebssystem, unterst\"utzte Hardwarearchtiketuren, eigene Paketverwaltung,
+Automatisches Update, VLAN, Art und Anzahl Netzwerk-Interfaces, Redundanz\\
+
+
+Auswahl und Begr\"undung einer konkreten Routerdistribution f\"ur die
+beispielhafte Implementierung von Praxisf\"allen im folgenden Kapitel
+
+\section{Ausgew\"ahlte Anwendungsf\"alle von pfSense}
+In diesem Kapitel soll die Implementierung praxisnaher Anwenungsf\"alle
+dokumentiert werden um die M\"oglichkeiten des Systemmanagements von pfSense
+vorzustellen. 
+
+\subsection{pfSense als DSL-Router im Heimbereich}
 Hier beginnt der erste Unterabschnitt des zweiten Hauptteils.
 
-\subsection{Zwischenüberschrift}
+\subsection{pfSense als redundanter Firewall-Cluster im Firmenumfeld}
 Hier beginnt der zweite Unterabschnitt des zweiten Hauptteils.
 
 
 \section{Schluss}
-Dies ist der Schlussteil.
+Dies ist der Schlussteil. Abschlie\ss{}ende Empfehlung
 %Beginn einer neuen Seite
+\clearpage
+
+\section{Glossar}
+\begin{description}
+ \item[Router] Ein Rechnersystem mit mindestens zwei Netzwerkschnittstellen,
+das Netzwerkschverkehr zwischen diesen Netzwerkschnittstellen nach einem
+Regelwerk vermittelt und weiterleitet.
+ \item[Routerdistribution] Eine spezielle Art von Betriebssystem, deren
+Hauptaugenmerk bei der Konzeption und Entwicklung darauf liegt
+Router-Funktionen sicher und stabil auszuf\"uhren
+ \item[VLAN] Die Abk\"urzung VLAN steht f\"ur Virtual Local Area Network und
+fasst Techniken zusammen um physikale Netzwerkstrukturen logisch zu
+Segmentieren, beispielsweise zur Erh\"ohung der Sicherheit oder um
+Broadcast-Dom\"anen zu verkleinern.
+\end{description}
 \clearpage
 
 \section{Literaturverzeichnis}
@@ -122,8 +261,10 @@ Musterfrau, Renate: Muster. Frankfurt 2003.
 
 
 Mustermann, Helmut: Noch ein Muster. Mit einer Einleitung hrsg. von Frank Muster. Frankfurt 2003.
-
-
+\section{Internetquellenverzeichnis}
+\begin{thebibliography}{99}
+\bibitem{IPCopManual} http://www.ipcop.org/1.4.0/en/install/html/
+\end{thebibliography}
 \end{document}
 %-------------------
 %Hier endet der Text deiner Hausarbeit
