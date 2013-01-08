@@ -1,12 +1,13 @@
 %Wir verwenden eine DIN-A4-Seite und die Schriftgröße 12.
-\documentclass[a4paper,12pt]{scrartcl} 
+\documentclass[a4paper,12pt]{scrartcl}
 
 
 %Diese drei Pakete benötigen wir für die Umlaute, Deutsche Silbentrennung etc.
-%Apple-Nutzer sollten anstelle von \usepackage[latin1]{inputenc} das Paket \usepackage[applemac]{inputenc} verwenden
+%Apple-Nutzer sollten anstelle von \usepackage[latin1]{inputenc} das Paket
+\usepackage[applemac]{inputenc} verwenden
 %% \usepackage[latin1]{inputenc}
 %%apt-get install texlive-lang-german damit ngerman keine Probleme mehr macht !!
-%\usepackage[utf8]{inputenc} 
+%\usepackage[utf8]{inputenc}
 %\usepackage[T1]{fontenc}
 %\usepackage[ngerman]{babel}
 
@@ -51,12 +52,14 @@ pdfstartpage=3, pdfstartview=FitH,]{hyperref} %Verlinkungen
 \setlength{\parindent}{0em}
 
 %Definition der Ränder
-\usepackage[paper=a4paper,left=30mm,right=30mm,top=30mm,bottom=30mm]{geometry} 
+\usepackage[paper=a4paper,left=30mm,right=30mm,top=30mm,bottom=30mm]{geometry}
 
 %Abstand der Fussnoten
 \deffootnote{1em}{1em}{\textsuperscript{\thefootnotemark\ }}
 
-%Regeln, bis zu welcher Tiefe (section,subsection,subsubsection) Überschriften angezeigt werden sollen (Anzeige der Überschriften im Verzeichnis / Anzeige der Nummerierung)
+%Regeln, bis zu welcher Tiefe (section,subsection,subsubsection) Überschriften
+angezeigt werden sollen (Anzeige der Überschriften im Verzeichnis / Anzeige der
+Nummerierung)
 %\setcounter{tocdepth}{3}
 %\setcounter{secnumdepth}{3}
 
@@ -67,8 +70,8 @@ pdfstartpage=3, pdfstartview=FitH,]{hyperref} %Verlinkungen
 %Beginn der Titelseite
 \begin{titlepage}
 \begin{small}
-\vfill {HTWK Leipzig\\ 
-Fachbereich IMN \\ 
+\vfill {HTWK Leipzig\\
+Fachbereich IMN \\
 Wintersemester 2012/2013}
 \end{small}
 
@@ -162,8 +165,8 @@ quelloffene Produkte. Da kommerzielle Produkte in den allermeisten F\"alle
 jedoch nicht im Quellcode verf\"ugbar und somit schwer an spezielle
 Bed\"urfnisse anzupassen sind und au\ss{}erdem oft betr\"achtliche Lizenzkosten
 verursachen, soll dieser Typus von Routerdistributionen in dieser Arbeit
-au\ss{}en vor bleiben. 
- 
+au\ss{}en vor bleiben.
+
 Weiterhin spielt f\"ur den potentiellen Einsatz im kommerziellen Umfeld
 neben Funktionen wie zum Beispiel VLAN-Unterst\"utzung auch der Faktor der
 Verf\"ugbarkeit eines kommerziellen Supports eine wichtige Rolle. Steht f\"ur
@@ -178,24 +181,19 @@ Planungssicherheit in einem bestimmten Rahmen zu bieten, sollte au\ss{}erdem
 eine Bedarfsanalyse durchgef\"uhrt werden. Diese sollte nicht nur die
 derzeitigen Anforderungen ber\"ucksichtigen, sondern auch zuk\"unftige wie zum
 Beispiel die Unterst\"utzung von IPv6.
- 
+
 \subsection{Konkrete Routerdistributionen im Vergleich}
 Im Folgenden soll ein Vergleich dreier verbreiteter OpenSource-
-<<<<<<< HEAD
-Routerdistributionen erfolgen. 
-=======
 Routerdistributionen erfolgen.
->>>>>>> fc8b3598eb3609f561d02bb521f74e7c10cbee95
 
 \subsubsection{Die Routerdistribution IPCop}
 IPCop ist eine Router-Distribution, die auf dem Betriebssystemkern Linux
 basiert und in der Version 1.0 bereits am 1. Januar 2002 ver\"offentlicht
 wurde. \footnote{\cite{IPCopManual}}
 
-<<<<<<< HEAD
 \subsubsection{Die Routerdistribution IPFire}
 IPFire basiert wie pfSense auf dem Betriebssystemkern Linux. Im Vergleich zu
-IPFire 
+IPFire
 
 \subsubsection{Die Routerdistribution pfSense}
 
@@ -231,32 +229,17 @@ beispielhafte Implementierung von Praxisf\"allen im folgenden Kapitel
 \section{Ausgew\"ahlte Anwendungsf\"alle von pfSense}
 In diesem Kapitel soll die Implementierung praxisnaher Anwenungsf\"alle
 dokumentiert werden um die M\"oglichkeiten des Systemmanagements von pfSense
-vorzustellen. 
+vorzustellen.
 
 \subsection{pfSense als DSL-Router im Heimbereich}
 Hier beginnt der erste Unterabschnitt des zweiten Hauptteils.
 
 \subsection{pfSense als redundanter Firewall-Cluster im Firmenumfeld}
-=======
-
-
-\section{Ausgew\"ahlte Anwendungsf\"alle von pfSense}
-Hier beginnnt der zweite Hauptteil des Belegs.
-
-\subsection{pfSense als DSL-Router}
-Hier beginnt der erste Unterabschnitt des zweiten Hauptteils.
-
-\subsection{pfSense als redundanter Firewall-Cluster}
->>>>>>> fc8b3598eb3609f561d02bb521f74e7c10cbee95
 Hier beginnt der zweite Unterabschnitt des zweiten Hauptteils.
 
 
 \section{Schluss}
-<<<<<<< HEAD
 Dies ist der Schlussteil. Abschlie\ss{}ende Empfehlung
-=======
-Dies ist der Schlussteil.
->>>>>>> fc8b3598eb3609f561d02bb521f74e7c10cbee95
 %Beginn einer neuen Seite
 \clearpage
 
@@ -280,7 +263,8 @@ Broadcast-Dom\"anen zu verkleinern.
 Musterfrau, Renate: Muster. Frankfurt 2003.
 
 
-Mustermann, Helmut: Noch ein Muster. Mit einer Einleitung hrsg. von Frank Muster. Frankfurt 2003.
+Mustermann, Helmut: Noch ein Muster. Mit einer Einleitung hrsg. von Frank
+Muster. Frankfurt 2003.
 \section{Internetquellenverzeichnis}
 \begin{thebibliography}{99}
 \bibitem{IPCopManual} http://www.ipcop.org/1.4.0/en/install/html/
