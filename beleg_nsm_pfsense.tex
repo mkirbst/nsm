@@ -1,13 +1,12 @@
 %Wir verwenden eine DIN-A4-Seite und die Schriftgröße 12.
-\documentclass[a4paper,12pt]{scrartcl}
+\documentclass[a4paper,12pt]{scrartcl} 
 
 
 %Diese drei Pakete benötigen wir für die Umlaute, Deutsche Silbentrennung etc.
-%Apple-Nutzer sollten anstelle von \usepackage[latin1]{inputenc} das Paket
-\usepackage[applemac]{inputenc} verwenden
+%Apple-Nutzer sollten anstelle von \usepackage[latin1]{inputenc} das Paket \usepackage[applemac]{inputenc} verwenden
 %% \usepackage[latin1]{inputenc}
 %%apt-get install texlive-lang-german damit ngerman keine Probleme mehr macht !!
-%\usepackage[utf8]{inputenc}
+%\usepackage[utf8]{inputenc} 
 %\usepackage[T1]{fontenc}
 %\usepackage[ngerman]{babel}
 
@@ -52,14 +51,12 @@ pdfstartpage=3, pdfstartview=FitH,]{hyperref} %Verlinkungen
 \setlength{\parindent}{0em}
 
 %Definition der Ränder
-\usepackage[paper=a4paper,left=30mm,right=30mm,top=30mm,bottom=30mm]{geometry}
+\usepackage[paper=a4paper,left=30mm,right=30mm,top=30mm,bottom=30mm]{geometry} 
 
 %Abstand der Fussnoten
 \deffootnote{1em}{1em}{\textsuperscript{\thefootnotemark\ }}
 
-%Regeln, bis zu welcher Tiefe (section,subsection,subsubsection) Überschriften
-angezeigt werden sollen (Anzeige der Überschriften im Verzeichnis / Anzeige der
-Nummerierung)
+%Regeln, bis zu welcher Tiefe (section,subsection,subsubsection) Überschriften angezeigt werden sollen (Anzeige der Überschriften im Verzeichnis / Anzeige der Nummerierung)
 %\setcounter{tocdepth}{3}
 %\setcounter{secnumdepth}{3}
 
@@ -70,8 +67,8 @@ Nummerierung)
 %Beginn der Titelseite
 \begin{titlepage}
 \begin{small}
-\vfill {HTWK Leipzig\\
-Fachbereich IMN \\
+\vfill {HTWK Leipzig\\ 
+Fachbereich IMN \\ 
 Wintersemester 2012/2013}
 \end{small}
 
@@ -165,8 +162,8 @@ quelloffene Produkte. Da kommerzielle Produkte in den allermeisten F\"alle
 jedoch nicht im Quellcode verf\"ugbar und somit schwer an spezielle
 Bed\"urfnisse anzupassen sind und au\ss{}erdem oft betr\"achtliche Lizenzkosten
 verursachen, soll dieser Typus von Routerdistributionen in dieser Arbeit
-au\ss{}en vor bleiben.
-
+au\ss{}en vor bleiben. 
+ 
 Weiterhin spielt f\"ur den potentiellen Einsatz im kommerziellen Umfeld
 neben Funktionen wie zum Beispiel VLAN-Unterst\"utzung auch der Faktor der
 Verf\"ugbarkeit eines kommerziellen Supports eine wichtige Rolle. Steht f\"ur
@@ -180,22 +177,95 @@ Um den generellen Kostenrahmen absch\"atzen zu k\"onnen und damit
 Planungssicherheit in einem bestimmten Rahmen zu bieten, sollte au\ss{}erdem
 eine Bedarfsanalyse durchgef\"uhrt werden. Diese sollte nicht nur die
 derzeitigen Anforderungen ber\"ucksichtigen, sondern auch zuk\"unftige wie zum
-Beispiel die Unterst\"utzung von IPv6.
+Beispiel die vollst\"andige Unterst\"utzung von IPv6.
 
+Au\ss{}erdem sollen die Routerdistributionen im Bezug auf modulare
+Erweiterbarkeit betrachtet werden, denn bei Verf\"ugbarkeit speziell
+vorgefertigter Softwarepakete, oft auch als so genannte Addons bezeichnet
+werden l\"asst sich der Nutzen der Routerdistribution f\"ur den Adminsitrator
+oft erheblich steigern. Jedoch soll an dieser Stelle ausdr\"ucklich darauf
+hingewiesen werden, dass jeder zus\"atzliche Dienst auch zus\"atzliche
+potentielle Sicherheitsl\"ucken birkt. Es gilt also im Bezug auf zus\"atzliche
+Dienste bei Routerdistributionen und Firewalls der Grundsatz: ``So viel wie
+n\"otig, jedoch so wenig wie m\"oglich!''
+ 
 \subsection{Konkrete Routerdistributionen im Vergleich}
 Im Folgenden soll ein Vergleich dreier verbreiteter OpenSource-
-Routerdistributionen erfolgen.
+Routerdistributionen erfolgen. 
 
 \subsubsection{Die Routerdistribution IPCop}
 IPCop ist eine Router-Distribution, die auf dem Betriebssystemkern Linux
 basiert und in der Version 1.0 bereits am 1. Januar 2002 ver\"offentlicht
 wurde. \footnote{\cite{IPCopManual}}
 
+Nach Aussagen der Entwickler von IPCop ist die Entwicklung vor allem auf eine
+zuverl\"assige, sichere und stabile Routerdistribution hin ausgerichtet, die
+auch von Laien eingerichtet und betrieben werden kann. Nach der Installation
+lassen sich s\"amtliche Konfigurationsparamter \"uber eine Weboberfl\"ache
+modifizieren, ein Zugriff auf die Kommandozeile der Routerdistribution ist also
+im Normalfall nicht erforderlich, jedoch m\"oglich. 
+
+Eine Erweiterbarkeit um viele Funktionen, die zu Lasten der Sicherheit geht,
+steht dagegen hinten an. Als Beispiel sei an dieser Stelle das Samba-Addon f\"ur
+IPCop erw\"ahnt, das es erm\"oglichte IPCop um einen Samba-Server zu erweitern,
+um den Rechner im lokalen Netzwerk hinter der IPCop einen Dateiserver
+haupts\"achlich f\"ur Windows-Clients zu bieten. Dieses Addon wurde absichtlich
+nicht mehr verf\"ugbar gemacht um die Sicherheit der IPCop-Firewall nicht durch
+diesen zus\"atzlichen Dienst herabzusetzen.\footnote{\cite{IPCopSamba}}
+
+Mit dem Erscheinen von IPCop Version 2.0 im Jahr unterst\"utzt IPCop weitere
+Hardware-Architekturen wie PowerPC, Cobalt und
+Sparc. Au\ss{}erdem erfolgte mit Einf\"uhrung
+von Version 2.0 eine \"Uberarbeitung
+verschiedener Dienste wie zum Beispiel des
+Zeitservers und des DHCP-Servers\footnote{\cite{IPCop20Hardware}}
+
+Es l\"asst sich also sagen, dass IPCop eine Routerdistribution ist, die sich
+nicht durch m\"oglichst hochgradigen Funktionsumfang sondern durch Sicherheit
+und Stabilit\"at definiert. 
+
 \subsubsection{Die Routerdistribution IPFire}
 IPFire basiert wie pfSense auf dem Betriebssystemkern Linux. Im Vergleich zu
-IPFire
+IPCop versucht man jedoch bei IPFire mehr Modularit\"at zu bieten, indem f\"ur
+viele popul\"are Dienste wie Asterisk, eine Telefonserver-Software oder Samba,
+vorkonfigurierte Pakete zur Verf\"ugung stehen.
+
+Weiterhin existieren auf der offiziellen Webpr\"asenz auch Anleitungen um
+Instanzen von IPFire in einer virtuellen Umgebung wie zum Beispiel unter Xen
+zur Ausf\"uhrung zu bringen.\footnote{\cite{IPFireAddons}} Die Virtualisierung
+von Firewalls ist jedoch ein eigenes, umstrittenes Gebiet, dass in dieser
+Arbeit nicht weiter aufgegriffen werden soll. Es wird auf entsprechende
+Literatur verwiesen. (QUELLEN EINF\"UGEN !!)
+
+Im Bezug auf IPFire ist festzuhalten, dass diese wie auch IPCop auf Linux
+basiert, jedoch im Vergleich zu IPCop mehr versucht einen Kompromiss zwischen
+Sicherheit und Erweiterbarkeit zu bieten.
 
 \subsubsection{Die Routerdistribution pfSense}
+Die Routerdistribution pfSense basiert auf dem Betriebssystem FreeBSD. Wie die
+anderen vorgestellen Routerdistributionen l\"asst sich auch pfSense nach der
+Installation quasi vollst\"andig \"uber die Weboberfl\"ache administrieren.
+
+Da pfSense auf FreeBSD aufbaut, ist diese Routerdistribution auch den gleichen
+Vorz\"ugen und Nachteilen unterworfen wie FreeBSD.
+
+Die Hardwareunterst\"utzung von FreeBSD ist nicht so umfangreich wie
+beispielsweise f\"ur Linux. Das sollte bei der Anschaffung von neuer Hardware
+f\"ur Routerdistributionen beachtet werden.\footnote{\cite{FreeBSDHardware}} Im
+Gegenzug bietet FreeBSD von Haus aus schon enorme Vorteile im Bezug auf den
+Funktionsumfang, beispielsweise war FreeBSD eines der ersten Betriebssystem die
+den IPv6-Stack vollst\"andig implementierten. Weitere Funktionen sind die
+Unterst\"utzung von VLANS beim Einsatz geeigneter Netzwerkkarten sowie
+Implementierung von Techniken Wie CARP und XMLRPC, die Vorraussetzung sind, wenn
+ein redundanter Firewallcluster implementiert werden soll.
+
+Weiterhin existiert f\"ur pfSense ein eigenes Paketverwaltungssystem, welches
+direkt aus der Weboberfl\"ache erreichbar ist und die pfSense um weitere
+Dienste und Funktionen erweitern kann. Es folgt eine Auflistung einer Auswahl
+von Paketen:
+\begin{description}
+ \item[squid] leistungsf\"ahiger Proxy-Server 
+\end{description}
 
 
 
@@ -229,7 +299,7 @@ beispielhafte Implementierung von Praxisf\"allen im folgenden Kapitel
 \section{Ausgew\"ahlte Anwendungsf\"alle von pfSense}
 In diesem Kapitel soll die Implementierung praxisnaher Anwenungsf\"alle
 dokumentiert werden um die M\"oglichkeiten des Systemmanagements von pfSense
-vorzustellen.
+vorzustellen. 
 
 \subsection{pfSense als DSL-Router im Heimbereich}
 Hier beginnt der erste Unterabschnitt des zweiten Hauptteils.
@@ -245,6 +315,9 @@ Dies ist der Schlussteil. Abschlie\ss{}ende Empfehlung
 
 \section{Glossar}
 \begin{description}
+ \item[DHCP-Server] DHCP steht als Abk\"urzung f\"ur "Dynamic Host
+Configuration Protokoll" und beschreibt Techniken um Hosts in Netzwerken
+dynamisch Netzwerkparameter wie IP-Adressen zuzuwei\ss{}en\footnote{\cite{dhcp}}
  \item[Router] Ein Rechnersystem mit mindestens zwei Netzwerkschnittstellen,
 das Netzwerkschverkehr zwischen diesen Netzwerkschnittstellen nach einem
 Regelwerk vermittelt und weiterleitet.
@@ -263,13 +336,30 @@ Broadcast-Dom\"anen zu verkleinern.
 Musterfrau, Renate: Muster. Frankfurt 2003.
 
 
-Mustermann, Helmut: Noch ein Muster. Mit einer Einleitung hrsg. von Frank
-Muster. Frankfurt 2003.
-\section{Internetquellenverzeichnis}
+Mustermann, Helmut: Noch ein Muster. Mit einer Einleitung hrsg. von Frank Muster. Frankfurt 2003.
+
 \begin{thebibliography}{99}
-\bibitem{IPCopManual} http://www.ipcop.org/1.4.0/en/install/html/
+
+\bibitem{IPCopManual} http://www.ipcop.org/1.4.0/en/install/html/ , abrufbar am
+16.12.2012
+
+\bibitem{IPCopSamba} http://www.ipcopwiki.de/index.php/Samba\_Server ,
+abrufbar am 20.12.2012\\
+\textit{Anm.: Der Artikel zu diesem Addon ist zwar noch verf\"ugbar, jedoch
+nicht die eigentlichen Dateien, die f\"ur das Addon erforderlich sind.}
+
+\bibitem{IPCop20Hardware}
+http://www.ipcop.org/2.0.0/en/admin/html/whatsnew.html , abrufbar am 11.01.2013
+
+\bibitem{IPFireAddons} http://wiki.ipfire.org/de/addons/start , abrufbar am
+10.01.2013
+
+\bibitem{FreeBSDHardware}
+http://www.freebsd.org/doc/de/books/faq/hardware.html\#which-hardware-to-get ,
+abrufbar am 12.01.2013
+
+\bibitem{dhcp} http://www.isc.org/software/dhcp , abrufbar am 11.01.2013
+
 \end{thebibliography}
 \end{document}
-%-------------------
-%Hier endet der Text deiner Hausarbeit
-%-------------------
+%% EOF
