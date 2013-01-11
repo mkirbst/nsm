@@ -27,14 +27,20 @@
 \usepackage{textcomp}
 \usepackage[T1]{fontenc}				%srccode
 \usepackage[scaled]{beramono}		%srccode
-%\usepackage{longtable}				%mehrseitige tabellen
+\usepackage{longtable}				%mehrseitige tabellen
 \usepackage[tableposition=b]{caption}
 \usepackage[pdftex, pdftoolbar=false, hyperfootnotes=false, bookmarks,
 bookmarksopen, bookmarksnumbered, bookmarksopenlevel=2, pdfpagelabels=true,
 pdfstartpage=3, pdfstartview=FitH,]{hyperref} %Verlinkungen
+\usepackage{array}					%farbige Tabellen
+\usepackage[table]{xcolor} 			%farbige Tabellen
+
 
 \definecolor{Navy}{rgb}{0,0,0.5}
 \definecolor{Gray}{gray}{0.5}
+\definecolor{dunkelgrau}{rgb}{0.8,0.8,0.8}
+\definecolor{hellgrau}{rgb}{0.95,0.95,0.95}
+\definecolor{hellgrau2}{rgb}{0.93,0.93,0.93}
 
 \hypersetup{
 	colorlinks=true, 			% false: boxed links; true: colored links
@@ -256,18 +262,33 @@ Gegenzug bietet FreeBSD von Haus aus schon enorme Vorteile im Bezug auf den
 Funktionsumfang, beispielsweise war FreeBSD eines der ersten Betriebssystem die
 den IPv6-Stack vollst\"andig implementierten. Weitere Funktionen sind die
 Unterst\"utzung von VLANS beim Einsatz geeigneter Netzwerkkarten sowie
-Implementierung von Techniken Wie CARP und XMLRPC, die Vorraussetzung sind, wenn
-ein redundanter Firewallcluster implementiert werden soll.
+Implementierung von Techniken Wie CARP und XMLRPC, die Vorraussetzung sind,
+wenn redundante Router- und Firewallcluster implementiert werden sollen.
 
 Weiterhin existiert f\"ur pfSense ein eigenes Paketverwaltungssystem, welches
 direkt aus der Weboberfl\"ache erreichbar ist und die pfSense um weitere
 Dienste und Funktionen erweitern kann. Es folgt eine Auflistung einer Auswahl
 von Paketen:
 \begin{description}
- \item[squid] leistungsf\"ahiger Proxy-Server 
+ \item[asterisk] verbreiteter Telefonserver-Dienst
+ \item[country block] erlaubt das Blockieren von eingehendem Internetverkehr
+anhand dessen l\"anderspezifischer Herkunft
+ \item[freeradius] freie Implementierung eines Radius-Servers der es
+erm\"oglicht, die Benutzer s\"amtlicher Dienste im Netzwerk gegen diesen Dienst
+authentifizieren zu lassen, beispielsweise Dateiserver oder WLAN-Zugang auf
+Basis von WPA(2)-Enterprise.
+ \item[squid] leistungsf\"ahiger Proxy-Server.
 \end{description}
 
-
+Durch den hohen Funktionsumfang der auch Techniken zur Hochverf\"ugbarkeit und
+logischen Segmentierung des lokalen Netzwerks umfasst ist pfSense f\"ur den
+Einsatz in mittleren bis gro\ss{}en Netzwerken, wie sie in Unternehmen und
+Hochschulen \"uberlicherweise vorhanden sind, eine interessante Alternative zu
+kommerziellen Produkten. Jedoch ist auch im Privatbereich der Einsatz von
+pfSense als Heimrouter-Software \"ublich, unter anderem deshalb, weil eine
+\"ubersichtliche und gut strukturiere Weboberfl\"ache Bestandteil dieser
+Routerdistribution ist, die auch mehrere Assistenen beinhaltet um dem
+Administrator die Konfiguration zu erleichtern
 
 \subsubsection{Leistungsmerkmale der vorgestellten Routerdistributionen im
 Vergleich}
@@ -291,6 +312,27 @@ Konflikte verursachen.\\
 -tabellarische Auflistung-
 Betriebssystem, unterst\"utzte Hardwarearchtiketuren, eigene Paketverwaltung,
 Automatisches Update, VLAN, Art und Anzahl Netzwerk-Interfaces, Redundanz\\
+
+
+%\vspace*{1cm}
+\begin{longtable}{p{34mm}>{\columncolor[gray]{0.97}}p{33mm}p{33mm}>{\columncolor
+[gray]{0.97}}p{33mm}}
+\rowcolor[gray]{.9}Funktion & \textbf{IPCop} & \textbf{IPFire} &
+\textbf{pfSense}\\
+Lizenz & GPL & GPL & BSD\\
+\rowcolor[gray]{.95}Betriebssystem & Linux & Linux & FreeBSD   \\
+Hardwarearchitektur & i386, Cobald, Sparc, PowerPC & i386,
+AMD64 & i386, AMD64\\
+\rowcolor[gray]{.95}vorkonfigurierte Pakete & nein & ja & ja \\
+eigene Paketverwaltung & nein & nein & ja \\
+\rowcolor[gray]{.95}Automatisches Update & nein & nein & ja \\
+VLAN-Unterst\"utzung & nein & nein & ja mit entsprechenden
+Netzwerkkarten\\
+\rowcolor[gray]{.95}Netzwerkschnittstellen & max. 4 & max. 4 & nur durch
+Hardware begrenzt \\
+\caption{Merkmale der Routerdistributionen im Vergleich}
+\label{Merkmale der Routerdistributionen im Vergleich}
+\end{longtable}
 
 
 Auswahl und Begr\"undung einer konkreten Routerdistribution f\"ur die
