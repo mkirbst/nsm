@@ -34,7 +34,18 @@ bookmarksopen, bookmarksnumbered, bookmarksopenlevel=2, pdfpagelabels=true,
 pdfstartpage=3, pdfstartview=FitH,]{hyperref} %Verlinkungen
 \usepackage{array}					%farbige Tabellen
 \usepackage[table]{xcolor} 			%farbige Tabellen
+\usepackage{graphicx}				% \includegraphics bnoetigt dies
+\usepackage{draftwatermark}			% wasserzeichen
+	%Quelle: http://choorucode.com/2010/05/05/latex-adding-draft-watermark/?like=1&source=post_flair&_wpnonce=1c9f85538d
+\SetWatermarkText{VORABVERSION}		% wasserzeichen-text
+\SetWatermarkLightness{0.9}			% wasserzeichen-kontrast
+\SetWatermarkScale{2.5}				% wasserzeichen-zeichengroe\ss{}e
 
+\newcommand{\includesvg}[1]{
+\immediate\write18{inkscape -z -D –file=images/#1.svg
+–export-pdf=images/#1.pdf –export-latex}
+\input{images/#1.pdf_tex}
+}
 
 \definecolor{Navy}{rgb}{0,0,0.5}
 \definecolor{Gray}{gray}{0.5}
@@ -82,7 +93,8 @@ Wintersemester 2012/2013}
 \begin{center}
 \begin{Large}
 \vfill {\textsf{\textbf{
-Die Möglichkeiten des System-Managements der Firewall-Distribution pfSense\\
+Die Möglichkeiten des System-Managements der Firewall-Distribution
+pfSense\\--VORABVERSION--\\
 }}}
 \end{Large}
 Beleg im Fach Netzwerk- und System-Management
@@ -127,6 +139,24 @@ werden, welches die Grundlage für pfSense bildet. Im folgenden soll ein kurzer
 und im Vergleich zu anderen Rouuterdistributionen. Abschließend sollen
 beispielhaft drei Konfigurationen vorgestellt werden um die Vielseitigkeit und
 Leistungsfähigkeit von pfSense zu demonstrieren.
+
+%\begin{figure}[htb]
+%  \begin{center}
+%    \includegraphics[width=1\hsize]{./images/test.png}
+%  \end{center}
+%  \caption[PNG-File]{\label{Test-Import: PNG-File} Test-Import PNG-FIle}
+%\end{figure}
+
+%\begin{figure}
+%\centering
+%% \def\svgwidth{\columnwidth}
+%\includesvg{./images/default}
+%\end{figure}
+
+\begin{center}
+ \includegraphics[width=2\hsize]{./images/default.pdf}
+ % test.pdf: 595x842 pixel, 72dpi, 20.99x29.70 cm, bb=0 0 595 842
+\end{center}
 
 
 \section{Routerdistributionen - Besonderheiten und Merkmale im Allgemeinen}
@@ -321,7 +351,7 @@ Automatisches Update, VLAN, Art und Anzahl Netzwerk-Interfaces, Redundanz\\
 \textbf{pfSense}\\
 Lizenz & GPL & GPL & BSD\\
 \rowcolor[gray]{.95}Betriebssystem & Linux & Linux & FreeBSD   \\
-Hardwarearchitektur & i386, Cobald, Sparc, PowerPC & i386,
+Hardware"-architektur & i386, Cobald, Sparc, PowerPC & i386,
 AMD64 & i386, AMD64\\
 \rowcolor[gray]{.95}vorkonfigurierte Pakete & nein & ja & ja \\
 eigene Paketverwaltung & nein & nein & ja \\
