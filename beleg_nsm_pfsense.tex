@@ -41,12 +41,6 @@ pdfstartpage=3, pdfstartview=FitH,]{hyperref} %Verlinkungen
 \SetWatermarkLightness{0.9}			% wasserzeichen-kontrast
 \SetWatermarkScale{2.5}				% wasserzeichen-zeichengroe\ss{}e
 
-\newcommand{\includesvg}[1]{
-\immediate\write18{inkscape -z -D –file=images/#1.svg
-–export-pdf=images/#1.pdf –export-latex}
-\input{images/#1.pdf_tex}
-}
-
 \definecolor{Navy}{rgb}{0,0,0.5}
 \definecolor{Gray}{gray}{0.5}
 \definecolor{dunkelgrau}{rgb}{0.8,0.8,0.8}
@@ -140,24 +134,14 @@ und im Vergleich zu anderen Rouuterdistributionen. Abschließend sollen
 beispielhaft drei Konfigurationen vorgestellt werden um die Vielseitigkeit und
 Leistungsfähigkeit von pfSense zu demonstrieren.
 
-%\begin{figure}[htb]
-%  \begin{center}
-%    \includegraphics[width=1\hsize]{./images/test.png}
-%  \end{center}
-%  \caption[PNG-File]{\label{Test-Import: PNG-File} Test-Import PNG-FIle}
-%\end{figure}
-
-%\begin{figure}
-%\centering
-%% \def\svgwidth{\columnwidth}
-%\includesvg{./images/default}
-%\end{figure}
-
+\begin{figure}[htb]
 \begin{center}
- \includegraphics[width=2\hsize]{./images/default.pdf}
+ \includegraphics[width=1\hsize]{./images/default.pdf}
  % test.pdf: 595x842 pixel, 72dpi, 20.99x29.70 cm, bb=0 0 595 842
 \end{center}
-
+\caption[Beispielhafte Standardkonfiguration eines Internetanschlu\ss{}, Quelle: Autor, verwendete Symbole unterliegen der
+GPL]{\label{stdinet}Beispielhafte Standardkonfiguration eines Internetanschlu\ss{}.}
+\end{figure}
 
 \section{Routerdistributionen - Besonderheiten und Merkmale im Allgemeinen}
 
