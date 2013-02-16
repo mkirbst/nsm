@@ -196,8 +196,8 @@ zur\"uckgreifen zu k\"onnen.
 Um den generellen Kostenrahmen absch\"atzen zu k\"onnen und damit
 Planungssicherheit in einem bestimmten Rahmen zu bieten, sollte au\ss{}erdem
 eine Bedarfsanalyse durchgef\"uhrt werden. Diese sollte nicht nur die
-derzeitigen Anforderungen ber\"ucksichtigen, sondern auch zuk\"unftige wie zum
-Beispiel die vollst\"andige Unterst\"utzung von IPv6.
+derzeitigen Anforderungen ber\"ucksichtigen, sondern auch zuk\"unftige Anforderungen,
+wie zum Beispiel die vollst\"andige Unterst\"utzung der Prtokollsammlung IPv6.
 
 Au\ss{}erdem sollen die Routerdistributionen im Bezug auf modulare
 Erweiterbarkeit betrachtet werden, denn bei Verf\"ugbarkeit speziell
@@ -275,12 +275,13 @@ f\"ur Routerdistributionen beachtet werden.\footnote{\cite{FreeBSDHardware}} Im
 Gegenzug bietet FreeBSD von Haus aus schon enorme Vorteile im Bezug auf den
 Funktionsumfang, beispielsweise war FreeBSD eines der ersten Betriebssystem die
 den IPv6-Stack vollst\"andig implementierten. Weitere Funktionen sind die
-Unterst\"utzung von VLANS beim Einsatz geeigneter Netzwerkkarten sowie
-Implementierung von Techniken Wie CARP und XMLRPC, die Vorraussetzung sind,
-wenn redundante Router- und Firewallcluster implementiert werden sollen.
+Unterst\"utzung von virtuellen Netzwerken, so genannten VLAN's, beim Einsatz
+geeigneter Netzwerkkarten sowie Implementierung von Techniken Wie CARP und XMLRPC,
+die Vorraussetzung sind, wenn redundante Router- und Firewallcluster implementiert
+werden sollen.
 
 Weiterhin existiert f\"ur pfSense ein eigenes Paketverwaltungssystem, welches
-direkt aus der Weboberfl\"ache erreichbar ist und die pfSense um weitere
+direkt aus der Weboberfl\"ache erreichbar ist und welches pfSense um weitere
 Dienste und Funktionen erweitern kann. Es folgt eine Auflistung einer Auswahl
 von Paketen:
 \begin{description}
@@ -294,22 +295,21 @@ Basis von WPA(2)-Enterprise.
  \item[squid] leistungsf\"ahiger Proxy-Server.
 \end{description}
 
-Durch den hohen Funktionsumfang der auch Techniken zur Hochverf\"ugbarkeit und
-logischen Segmentierung des lokalen Netzwerks umfasst ist pfSense f\"ur den
-Einsatz in mittleren bis gro\ss{}en Netzwerken, wie sie in Unternehmen und
-Hochschulen \"uberlicherweise vorhanden sind, eine interessante Alternative zu
-kommerziellen Produkten. Jedoch ist auch im Privatbereich der Einsatz von
-pfSense als Heimrouter-Software \"ublich, unter anderem deshalb, weil eine
-\"ubersichtliche und gut strukturiere Weboberfl\"ache Bestandteil dieser
-Routerdistribution ist, die auch mehrere Assistenen beinhaltet um dem
-Administrator die Konfiguration zu erleichtern
+Durch den hohen Funktionsumfang der auch Techniken zur Realisierung von
+Hochverf\"ugbarkeitsclustern und der logischen Segmentierung des lokalen Netzwerks
+umfasst ist pfSense f\"ur den Einsatz in mittleren bis gro\ss{}en Netzwerken,
+wie sie in Unternehmen und Hochschulen \"uberlicherweise vorhanden sind, eine
+interessante Alternative zu kommerziellen Produkten. Jedoch ist auch im
+Privatbereich der Einsatz von pfSense als Heimrouter-Software \"ublich,
+unter anderem deshalb, weil eine \"ubersichtliche und gut strukturiere Weboberfl\"ache
+Bestandteil dieser Routerdistribution ist, die auch mehrere Assistenen beinhaltet
+um dem Administrator die Konfiguration zu erleichtern
 
 \subsubsection{Leistungsmerkmale der vorgestellten Routerdistributionen im
 Vergleich}
 Im folgenden sollen die wichtigsten Vorz\"uge und Leistungsmerkmale der
 ausgew\"ahlten Routerdistributionen noch einmal direkt gegen\"uber gestellt
 werden.\\
-
 
 Ber\"ucksichtigt werden im Folgenden jedoch nur Funktionen, die bei einer
 Standardinstallation bereits verf\"ugbar sind oder durch ein eventuell
@@ -322,11 +322,6 @@ nachger\"ustet werden, jedoch handelt es sich dann um individuelle
 Modifikationen die in der Praxis in der Regel nicht im gr\"o\ss{}eren Umfeld
 getestet wurden und eventuell bei sp\"ateren Updates der Firewalldistribution
 Konflikte verursachen.\\
-
--tabellarische Auflistung-
-Betriebssystem, unterst\"utzte Hardwarearchtiketuren, eigene Paketverwaltung,
-Automatisches Update, VLAN, Art und Anzahl Netzwerk-Interfaces, Redundanz\\
-
 
 %\vspace*{1cm}
 \begin{longtable}{p{34mm}>{\columncolor[gray]{0.97}}p{33mm}p{33mm}>{\columncolor
@@ -344,6 +339,9 @@ VLAN-Unterst\"utzung & nein & nein & ja mit entsprechenden
 Netzwerkkarten\\
 \rowcolor[gray]{.95}Netzwerkschnittstellen & max. 4 & max. 4 & nur durch
 Hardware begrenzt \\
+Redundanz bez\"uglich Fehlfunktionen der Hardware & Softwarebasiertes RAID1 mittels mdadm & nein\footnote{\cite{IPFireSWRAID}}\ & Softwarebasiertes RAID 1
+mittels GEOM\\
+\rowcolor[gray]{.95}Clusterf\"ahigkeit & nein & nein & ja, durch CARP, XMLRPC, pfsync \\
 \caption{Merkmale der Routerdistributionen im Vergleich}
 \label{Merkmale der Routerdistributionen im Vergleich}
 \end{longtable}
@@ -387,35 +385,49 @@ Broadcast-Dom\"anen zu verkleinern.
 \end{description}
 \clearpage
 
-\section{Literaturverzeichnis}
+\section{Literatur- und Quellenverzeichnis}
 
-Musterfrau, Renate: Muster. Frankfurt 2003.
+\renewcommand\refname{Literaturverzeichnis}
+\begin{thebibliography}{999}
+\bibitem{IPCopManual}
+\url{http://www.ipcop.org/1.4.0/en/install/html/}
+\\Abrufbar am 16.12.2012.
+\end{thebibliography}
 
+\renewcommand\refname{Quellenverzeichnis}
+\begin{thebibliography}{999}
 
-Mustermann, Helmut: Noch ein Muster. Mit einer Einleitung hrsg. von Frank Muster. Frankfurt 2003.
+\bibitem{IPCopManual}
+\url{http://www.ipcop.org/1.4.0/en/install/html/}
+\\Abrufbar am 16.12.2012.
 
-\begin{thebibliography}{99}
-
-\bibitem{IPCopManual} http://www.ipcop.org/1.4.0/en/install/html/ , abrufbar am
-16.12.2012
-
-\bibitem{IPCopSamba} http://www.ipcopwiki.de/index.php/Samba\_Server ,
-abrufbar am 20.12.2012\\
-\textit{Anm.: Der Artikel zu diesem Addon ist zwar noch verf\"ugbar, jedoch
+\bibitem{IPCopSamba}
+\url{http://www.ipcopwiki.de/index.php/Samba\_Server}
+\\Abrufbar am 20.12.2012.
+\\\textit{Anmerkung: Der Artikel zu diesem Addon ist zwar noch verf\"ugbar, jedoch
 nicht die eigentlichen Dateien, die f\"ur das Addon erforderlich sind.}
 
 \bibitem{IPCop20Hardware}
-http://www.ipcop.org/2.0.0/en/admin/html/whatsnew.html , abrufbar am 11.01.2013
+\url{http://www.ipcop.org/2.0.0/en/admin/html/whatsnew.html}
+\\Abrufbar am 11.01.2013.
 
-\bibitem{IPFireAddons} http://wiki.ipfire.org/de/addons/start , abrufbar am
-10.01.2013
+\bibitem{IPFireAddons}
+\url{http://wiki.ipfire.org/de/addons/start}
+\\Abrufbar am 10.01.2013.
 
 \bibitem{FreeBSDHardware}
-http://www.freebsd.org/doc/de/books/faq/hardware.html\#which-hardware-to-get ,
-abrufbar am 12.01.2013
+\url{http://www.freebsd.org/doc/de/books/faq/hardware.html\#which-hardware-to-get}
+\\Abrufbar am 12.01.2013.
 
-\bibitem{dhcp} http://www.isc.org/software/dhcp , abrufbar am 11.01.2013
+\bibitem{IPFireSWRAID}
+\url{http://wiki.ipfire.org/de/addons/mdadm/starten}
+\\Abrufbar am 16.02.2013.
+
+\bibitem{dhcp}
+\url{http://www.isc.org/software/dhcp}
+\\Abrufbar am 11.01.2013.
 
 \end{thebibliography}
+
 \end{document}
 %% EOF
