@@ -19,6 +19,7 @@
 %%HTWM-Vorlage - benoetigt apt-get install texlive-fonts-extra
 \setcounter{tocdepth}{3}				%Schatelungstiefe Inhaltsverz.
 \usepackage[utf8]{inputenc}			%deutsche Umlaute
+\usepackage{german, ngerman}
 \usepackage[ngerman]{babel}			%Rechtschreibprüfung
 \usepackage{color,listings} 			%Quellcode Highlighting, bindet das
 %Paket Listings ein
@@ -35,11 +36,20 @@ pdfstartpage=3, pdfstartview=FitH,]{hyperref} %Verlinkungen
 \usepackage{array}					%farbige Tabellen
 \usepackage[table]{xcolor} 			%farbige Tabellen
 \usepackage{graphicx}				% \includegraphics bnoetigt dies
+
+\usepackage{fancyhdr, graphicx}		%% Logo auf Titelseite
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[L]{}
+\fancyhead[R]{
+  \includegraphics[width=52mm]{./images/htwk.png}
+}
 \usepackage{draftwatermark}			% wasserzeichen
 	%Quelle: http://choorucode.com/2010/05/05/latex-adding-draft-watermark/?like=1&source=post_flair&_wpnonce=1c9f85538d
 \SetWatermarkText{VORABVERSION}		% wasserzeichen-text
 \SetWatermarkLightness{0.9}			% wasserzeichen-kontrast
 \SetWatermarkScale{2.5}				% wasserzeichen-zeichengroe\ss{}e
+
+
 
 \definecolor{Navy}{rgb}{0,0,0.5}
 \definecolor{Gray}{gray}{0.5}
@@ -62,7 +72,7 @@ pdfstartpage=3, pdfstartview=FitH,]{hyperref} %Verlinkungen
 \setlength{\parindent}{0em}
 
 %Definition der Ränder
-\usepackage[paper=a4paper,left=30mm,right=30mm,top=30mm,bottom=30mm]{geometry} 
+\usepackage[paper=a4paper,left=30mm,right=30mm,top=30mm,bottom=30mm]{geometry}
 
 %Abstand der Fussnoten
 \deffootnote{1em}{1em}{\textsuperscript{\thefootnotemark\ }}
@@ -71,18 +81,54 @@ pdfstartpage=3, pdfstartview=FitH,]{hyperref} %Verlinkungen
 %\setcounter{tocdepth}{3}
 %\setcounter{secnumdepth}{3}
 
+\fancypagestyle{htwkheader}
+{
+   \fancyhf{}	% clear all header and footer fields
+  \fancyhead[RO]{
+	\makebox[\textwidth]{	%% schiebe Logo nach aussen auf den Rand
+		\rule{1				%% nach aussen schieben hoeherer Wert -> Logo weiter nach aussen
+		  \textwidth}{0cm} %% nicht nach unten schieben = 0cm
+			\includegraphics*[width=52mm]{./images/htwk.png}	%%Logo HTWK
+	  }
+  }
+}
 
 
 \begin{document}
-
 %Beginn der Titelseite
-\begin{titlepage}
-\begin{small}
-\vfill {HTWK Leipzig\\ 
-Fachbereich IMN \\ 
-Wintersemester 2012/2013}
-\end{small}
 
+\begin{titlepage}
+\thispagestyle{htwkheader}		
+%\addtolength{\voffset}{-2cm}		
+%\addtolength{\topmargin}{-2cm}
+%\addtolength{\bottommargin}{2cm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Oberer Teil: Links Textblock HTWK, Rechts Logo HTWK %%
+%%\begin{figure}[htbp]
+%%\begin{minipage}[t]{6cm}	%% linker Teil
+%%\vspace{0cm}
+HTWK Leipzig\\
+Fachbereich IMN \\
+Wintersemester 2012/2013
+%%\end{minipage}
+%%\hfill						%% Zwischenraum auffuellen
+%%\begin{minipage}[t]{6cm}	%% rechter Teil
+%%\vspace{0pt}
+%%\makebox[\textwidth]{	%% schiebe Logo nach aussen auf den Rand
+%%  \rule{1				%% nach aussen schieben hoeherer Wert -> Logo weiter nach aussen
+%%    \textwidth}{0cm} %% nicht nach unten schieben = 0cm
+%%      \includegraphics*[width=52mm]{./images/htwk.png}	%%Logo HTWK
+%%}
+
+%%  \end{flushright}
+%%\caption{Bild1}			%% keine Bildbeschriftung fuer Logo
+%%\label{fig:Bild1}			%% nicht ins Abbildungsverzeichnis aufnehmen
+%%\end{minipage}
+%%\end{figure}
+
+%\vspace{6cm}
+
+%\addtolength{\voffset}{0cm}
 
 \begin{center}
 \begin{Large}
@@ -95,13 +141,19 @@ Beleg im Fach Netzwerk- und System-Management
 \end{center}
 
 \begin{small}
-\vfill Marcel Kirbst \\ Sieglitz 39 \\  06618 Molau \\
+\vfill
+Marcel Kirbst \\
+Sieglitz 39 \\
+06618 Molau \\
 marcel.kirbst@stud.htwk-leipzig.de\\
 \today
 \end{small}
 
 \end{titlepage}
-%Ende der Titelseite
+\addtolength{\voffset}{0cm}
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%Ende der Titelseite%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 %Inhaltsverzeichnis (aktualisiert sich erst nach dem zweiten Setzen)
@@ -114,9 +166,14 @@ marcel.kirbst@stud.htwk-leipzig.de\\
 %Anderthalbzeiliger Zeilenabstand ab hier
 \onehalfspacing
 
-\pagestyle{plain}
+%%\pagestyle{plain}
+\pagestyle{headings}	%% lebende Kopfzeile
 
+%%Abbildungsverzeichnis hier erstellen
+\clearpage
+\listoffigures
 
+\clearpage
 \section{Einleitung}
 Dieser Beleg befasst sich der Vorstellung der Routerdistribution pfSense.
 Im Vergleich zu den unzähligen anderen, existierenden Routerdistributionen
@@ -124,6 +181,9 @@ zeichnet sich pfSense durch seinen hohen Funktionsumfang aus, der beispielsweise
 auch Funktionen zur Sicherstellung von Redundanz und Ausfallsicherheit umfasst,
 wie sie sonst nur bei preisintensiven proprietären Lösungen kommerzieller
 Anbieter verfügbar sind.
+
+%\vspace{5mm}
+%\includegraphics*{./images/htwk.png}	%  kleines logo
 
 
 Nachdem grundlegende Begriffe erläutert wurden, soll kurz auf die
@@ -136,13 +196,14 @@ Leistungsfähigkeit von pfSense zu demonstrieren.
 
 \begin{figure}[htb]
 \begin{center}
- \includegraphics[width=1\hsize]{./images/default.pdf}
+ \includegraphics[width=0.65\hsize]{./images/default.pdf}
  % test.pdf: 595x842 pixel, 72dpi, 20.99x29.70 cm, bb=0 0 595 842
 \end{center}
 \caption[Beispielhafte Standardkonfiguration eines Internetanschlu\ss{}, Quelle: Autor, verwendete Symbole unterliegen der
 GPL]{\label{stdinet}Beispielhafte Standardkonfiguration eines Internetanschlu\ss{}.}
 \end{figure}
 
+\clearpage
 \section{Routerdistributionen - Besonderheiten und Merkmale im Allgemeinen}
 
 \subsection{Begrifflichkeiten im Zusammenhang mit Routerdistributionen}
@@ -328,7 +389,7 @@ Konflikte verursachen.\\
 [gray]{0.97}}p{33mm}}
 \rowcolor[gray]{.9}Funktion & \textbf{IPCop} & \textbf{IPFire} &
 \textbf{pfSense}\\
-Lizenz & GPL & GPL & BSD\\
+Lizenz & GPL\cite{GPLLicense} & GPL\cite{GPLLicense} & BSD\cite{FreeBSDLicense}\\
 \rowcolor[gray]{.95}Betriebssystem & Linux & Linux & FreeBSD   \\
 Hardware"-architektur & i386, Cobald, Sparc, PowerPC & i386,
 AMD64 & i386, AMD64\\
@@ -342,31 +403,80 @@ Hardware begrenzt \\
 Redundanz bez\"uglich Fehlfunktionen der Hardware & Softwarebasiertes RAID1 mittels mdadm & nein\footnote{\cite{IPFireSWRAID}}\ & Softwarebasiertes RAID 1
 mittels GEOM\\
 \rowcolor[gray]{.95}Clusterf\"ahigkeit & nein & nein & ja, durch CARP, XMLRPC, pfsync \\
-\caption{Merkmale der Routerdistributionen im Vergleich}
+Kommerzieller Support verf\"ugbar ? & ja & ja & ja \\
+\caption{Merkmale ausgew\"ahlter Routerdistributionen im Vergleich}
 \label{Merkmale der Routerdistributionen im Vergleich}
 \end{longtable}
 
+Aus dem tabellarischen Vergleich der drei Router-Distributionen ist ersichtlich, dass pfSense vom Funktionsumfang und auch im Bezug auf die Funktionalit\"aten
+im Firmenumfeld den anderen Distributionen deutlich \"uberlegen ist. Aus diesem Grund sollen im Folgenden ein \"Uberblick \"uber pfSense erfolgen.
 
-Auswahl und Begr\"undung einer konkreten Routerdistribution f\"ur die
-beispielhafte Implementierung von Praxisf\"allen im folgenden Kapitel
+\section{pfSense im \"Uberblick}
+Die Firewall-Distribution pfSense ist eine sehr leistungsf\"ahige Software mit hohem Funktionsumfang, welche im folgenden Kapitel vorgestellt werden soll.
 
+\subsection{Das Betriebssystem FreeBSD - Basis von pfSense}
+Die Router-Distribution pfSense basiert auf dem Betriebssystem FreeBSD. Aus diesem Grund soll in diesem Abschnitt kurz auf die Vorz\"uge und Besonderheiten von
+FreeBSD eingegangen werden. FreeBSD ist ein unixodies Betriebssytem welches eine Reihe von fortschrittlichen Techniken implementiert. Beispielhaft seien an
+dieser Stelle der Netzwerk-Paketfilter mit der Bezeichnung pf genannt, der duch das Tool pfsync um die Funktionalit\"at der Netzwerksynchroniserbarkeit
+erweitert wird. Weiterhin implementiert FreeBSD eine Technik mit der Bezeichnung Common Address Redundancy Protokoll, welche eine Synchronisierung des Zustandes
+der Verbindungstabelle zwischen FreeBSD-Instanzen erlaubt. FreeBSD implementiert einen sehr robusten und leistungsf\"ahigen Netzwerkstack, der es f\"ur den
+Einsatz als Betriebssystem auf Netzwerkkomponenten wie Routern und Servern pr\"adestiniert. Beispielsweise war FreeBSD eines der ersten Betriebssysteme die
+im Jahr 2003 einen vollst\"andigen IPv6-Netzwerkstack implementierten. Einen wichtigen Schwerpunkt im Design und der Entwicklung von FreeBSD spielt Sicherheit.
+Durch Techniken wie die so genannten BSD-Jails, die in FreeBSD seit vielen Jahren zur Verf\"ugung stehen rechtfertigt FreeBSD seinen hervorragenden Ruf im Bezug
+auf die Sicherheit. Nicht zuletzt die Lizenz, unter der FreeBSD ver\"offentlicht wird und die dem Benutzer sehr weitreichende Rechte einr\"aumt, ist besonders
+hervor zu heben.
+
+Im Vergleich zu anderen verbreiteten BSD-Dreviaten wie OpenBSD bietet FreeBSD au\ss{}erdem \"uber das so genannte Port-System Zugriff auf eine umfangreiche
+Auswahl von Software aus der Linux-Welt. 
+
+Als weiterf\"uhrende Literatur sei auf \cite{buch_bsdultguide} und \cite{buch_bookofpf} sowie die Online-Dokumentation\footnote{\cite{FreeBSDDoc}} zu FreeBSD
+verwiesen.
+%\subsubsection{Entwicklung von FreeBSD}
+%
+%- unixodies Betriebssystem
+%- opensource
+% performanter und robuster Netzwerkstack
+%- IPv6 seit Ewigkeiten
+%
+%\subsubsection{FreeBSD heute}
+%- FreeBSD <-> OpenBSD
+%- Einsatz in allen ernstzunehmenden Unternehmen mit Internetschwerpunkt InternetExchange (-> Podcast)
+%- Weiterf\"uhrende Literatur: FreeBSD-B\"ucher
+
+\subsection{pfSense Features}
+\cite{vortrag_bsdfirewalling}
+- pfSense bis Version 2.0 haupts\"achlich Weboberfl\"ache f\"ur FreeBSD
+- komplette Konfiguration in einer einzigen XML-Datei
+- ab 2.1 voller IPv6-Support
+- kommerzieller Support verf\"ugbar
+- 802.11q VLAN Support
+- DHCP-Server
+- SNMP
+- Sicherung und Wiederherstellung der Konfiguration per Web-Oberfl\"ache
+- Verwendung von Alias-Bezeichnern f\"ur einzelne Rechner und Gruppen
+- Load Balancing f\"ur eingehenden und ausgehenden Netzwerkverkehr
+- Unterst\"utzung f\"ur mehrere WAN-Anschl\"usse gleichzeitig
+- optimiert auf m\"oglichst wenig Neustarts nach \"Anderungen an der Konfiguration
+-
+- Anwendungsf\"alle
+
+\clearpage
 \section{Ausgew\"ahlte Anwendungsf\"alle von pfSense}
 In diesem Kapitel soll die Implementierung praxisnaher Anwenungsf\"alle
 dokumentiert werden um die M\"oglichkeiten des Systemmanagements von pfSense
 vorzustellen. 
 
 \subsection{pfSense als DSL-Router im Heimbereich}
-Hier beginnt der erste Unterabschnitt des zweiten Hauptteils.
+In diesem ersten Konfigurationsbeispiel erfolgt der Internetzugang \"uber
 
 \subsection{pfSense als redundanter Firewall-Cluster im Firmenumfeld}
 Hier beginnt der zweite Unterabschnitt des zweiten Hauptteils.
 
-
+\clearpage
 \section{Schluss}
 Dies ist der Schlussteil. Abschlie\ss{}ende Empfehlung
-%Beginn einer neuen Seite
-\clearpage
 
+\clearpage
 \section{Glossar}
 \begin{description}
  \item[DHCP-Server] DHCP steht als Abk\"urzung f\"ur "Dynamic Host
@@ -383,15 +493,24 @@ fasst Techniken zusammen um physikale Netzwerkstrukturen logisch zu
 Segmentieren, beispielsweise zur Erh\"ohung der Sicherheit oder um
 Broadcast-Dom\"anen zu verkleinern.
 \end{description}
+CARP pf pfsync XMLRPC BSD FreeBSD OpenBSD linux Betriebssystem BSD-Lizenz GPL-Lizenz Cluster(HA,HP, ) Intel, BSD-Jails
+
 \clearpage
 
 \section{Literatur- und Quellenverzeichnis}
 
 \renewcommand\refname{Literaturverzeichnis}
 \begin{thebibliography}{999}
-\bibitem{IPCopManual}
-\url{http://www.ipcop.org/1.4.0/en/install/html/}
-\\Abrufbar am 16.12.2012.
+
+\bibitem{buch_bsdultguide}Michael W. Lucas:  {\sl Absolute BSD (2nd Edition). The Ultimate Guide to FreeBSD.} No Starch Press, 2008,
+\\ISBN: 978-1-59327-151-0
+
+\bibitem{buch_bookofpf}Peter N.M. Hansteen:  {\sl The Book of PF}. No Starch Press, 2008,
+\\ISBN: 978-1-59327-165-7
+
+\bibitem{buch_pfsultguide}Christopher M. Buechler, Jim Pingle: {\sl pfSense: The Definitive Guide.} Reed Media Services, 2009,
+\\ISBN: 978-0-97903-428-2
+
 \end{thebibliography}
 
 \renewcommand\refname{Quellenverzeichnis}
@@ -415,6 +534,18 @@ nicht die eigentlichen Dateien, die f\"ur das Addon erforderlich sind.}
 \url{http://wiki.ipfire.org/de/addons/start}
 \\Abrufbar am 10.01.2013.
 
+\bibitem{GPLLicense}
+\url{http://www.gnu.org/licenses/gpl.html}
+\\Abrufbar am 20.02.2013
+
+\bibitem{FreeBSDDoc}
+\url{http://www.freebsd.org/docs.html}
+\\Abrufbar am 21.02.2013
+
+\bibitem{FreeBSDLicense}
+\url{http://www.freebsd.org/copyright/freebsd-license.html}
+\\Abrufbar am 20.02.2013
+
 \bibitem{FreeBSDHardware}
 \url{http://www.freebsd.org/doc/de/books/faq/hardware.html\#which-hardware-to-get}
 \\Abrufbar am 12.01.2013.
@@ -426,6 +557,14 @@ nicht die eigentlichen Dateien, die f\"ur das Addon erforderlich sind.}
 \bibitem{dhcp}
 \url{http://www.isc.org/software/dhcp}
 \\Abrufbar am 11.01.2013.
+
+\bibitem{ixpos}
+\url{https://www.euro-ix.net/documents/1024-Euro-IX-IXP-Report-pdf}
+\\Abrufbar am 18.02.2013
+
+\bibitem{vortrag_bsdfirewalling}
+\url{http://www.bsdcan.org/2006/papers/BSD_Firewalling.pdf}
+\\Abrufbar am 19.02.2013
 
 \end{thebibliography}
 
